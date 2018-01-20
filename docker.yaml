@@ -15,7 +15,20 @@
       apt: pkg=docker-ce state=installed update_cache=true
       notify:
        - start docker
-      
+  
+    - name: Login to docker
+      docker_login:
+        username: prasandevops
+        password: password-1
+        email: prasannalike@gmail.com
+
+    - name: Launch docker container
+      docker_container:
+        name: bottlecontainer
+        image: prasandevops/test:latest
+        ports:
+          - "4040:8080"
+
   handlers:
     - name: start docker
       service: name=docker state=started
